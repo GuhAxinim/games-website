@@ -5,7 +5,6 @@
     <title>Cobb Can Move</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-    <!-- Ajustado para .CSS maiúsculo como na sua pasta -->
     <link rel="stylesheet" href="style.CSS">
 </head>
 <body>
@@ -18,8 +17,19 @@
         </div>
     </noscript>
 
-    <!-- Ajustado o c3Main.js com o M maiúsculo -->
+    <!-- Scripts de inicialização do Construct 3 -->
     <script src="modernjscheck.js" type="module"></script>
     <script src="c3Main.js" type="module"></script>
+
+    <!-- Configuração extra para garantir que o service worker do jogo funcione na Vercel -->
+    <script>
+        // Força o registro dos scripts do Construct caso o carregador principal precise de suporte
+        window.C3_RegisterSW = function C3_RegisterSW() {
+            if (navigator.serviceWorker && navigator.serviceWorker.register) {
+                navigator.serviceWorker.register("sw.js", { scope: "./" })
+                    .catch(function(err) { console.warn("Error registering service worker: ", err); });
+            }
+        };
+    </script>
 </body>
 </html>
