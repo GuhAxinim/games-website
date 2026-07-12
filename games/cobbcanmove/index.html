@@ -17,19 +17,7 @@
         </div>
     </noscript>
 
-    <!-- Scripts de inicialização do Construct 3 -->
     <script src="modernjscheck.js" type="module"></script>
     <script src="c3Main.js" type="module"></script>
-
-    <!-- Configuração extra para garantir que o service worker do jogo funcione na Vercel -->
-    <script>
-        // Força o registro dos scripts do Construct caso o carregador principal precise de suporte
-        window.C3_RegisterSW = function C3_RegisterSW() {
-            if (navigator.serviceWorker && navigator.serviceWorker.register) {
-                navigator.serviceWorker.register("sw.js", { scope: "./" })
-                    .catch(function(err) { console.warn("Error registering service worker: ", err); });
-            }
-        };
-    </script>
 </body>
 </html>
